@@ -30,8 +30,9 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_get_true_when_park(){
-        assertThat(parkingLot.parkCar(this.car).getCar().getCarNumber(), is("123456"));
+    public void should_get_Car_when_park(){
+        String carNum = parkingLot.parkCar(this.car).getCar().getCarNumber();
+        assertThat(carNum, is("123456"));
     }
 
     @Test
@@ -45,7 +46,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void shoule_get_car_when_certificate_is_available(){
+    public void should_get_car_when_certificate_is_available(){
         Certificate certificate = this.parkingLot.parkCar(this.car);
 
         Car car = this.parkingLot.getCar(certificate);
@@ -53,11 +54,18 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void shoule_get_null_when_certificate_not_available(){
+    public void should_get_null_when_certificate_not_available(){
         Certificate certificate = this.parkingLot.parkCar(this.car);
 
         Car car = this.parkingLot.getCar(notAvailableCertificate);
         assertThat(car, nullValue());
+    }
+
+    @Test
+    public void should_get_1_given_1(){
+        this.parkingLot.parkCar(this.car);
+        assertThat(this.parkingLot.getAvailableSpaces(), is(1));
+
     }
 
 }

@@ -1,5 +1,7 @@
 package com.thoughtworks.tdd;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -9,7 +11,7 @@ import java.util.UUID;
  * @date 2018-07-11 14:13
  */
 public class ParkingLot {
-    public Map<String, Car> parkingSpaces;
+    private Map<String, Car> parkingSpaces;
     private Integer size;
 
     public ParkingLot(Integer size) {
@@ -42,6 +44,10 @@ public class ParkingLot {
     private boolean certificateIsAvailable(Certificate certificate){
         return this.parkingSpaces.containsKey(certificate.getId()) 
                 && certificate.getParkingLot() == this;
+    }
+
+    public int getAvailableSpaces(){
+        return this.size - this.parkingSpaces.size();
     }
 
 
