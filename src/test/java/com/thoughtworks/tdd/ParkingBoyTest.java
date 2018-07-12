@@ -1,10 +1,8 @@
 package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
@@ -15,6 +13,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * @date 2018-07-12 10:59
  */
 public class ParkingBoyTest {
+
     @Test
     public void should_get_certificate_when_has_spaces() {
         ParkingLot parkingLot = new ParkingLot(1);
@@ -39,6 +38,22 @@ public class ParkingBoyTest {
         Certificate certificate = parkingBoy.park(car);
 
         assertThat(certificate, nullValue());
+    }
+
+    @Test
+    public void should_car_be_parked_in_first_parkinglot_when_park(){
+        ParkingLot parkingLot1 = new ParkingLot(1);
+        ParkingLot parkingLot2 = new ParkingLot(1);
+        List<ParkingLot> parkingLotList = new ArrayList<>();
+        parkingLotList.add(parkingLot1);
+        parkingLotList.add(parkingLot2);
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
+        Car car = new Car("123456");
+
+        parkingBoy.park(car);
+
+        assertThat(parkingLot1.getAvailableSpaces(), is(0));
+        assertThat(parkingLot2.getAvailableSpaces(), is(1));
     }
 
     @Test
@@ -92,6 +107,5 @@ public class ParkingBoyTest {
 
         assertThat(canPark, is(false));
     }
-
 
 }
