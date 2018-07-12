@@ -1,13 +1,9 @@
 package com.thoughtworks.tdd;
 
-import org.hamcrest.core.IsNull;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.internal.matchers.Null;
 
 import java.util.UUID;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -36,7 +32,7 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_get_null_when_lot_is_full(){
+    public void should_get_null_when_parkingLot_is_full(){
         parkingLot.parkCar(new Car("111111"));
         parkingLot.parkCar(new Car("222222"));
 
@@ -59,13 +55,14 @@ public class ParkingLotTest {
 
         Car car = this.parkingLot.getCar(notAvailableCertificate);
         assertThat(car, nullValue());
+
     }
 
     @Test
-    public void should_get_1_given_1(){
+    public void should_get_available_space_is_1_given_1(){
         this.parkingLot.parkCar(this.car);
         assertThat(this.parkingLot.getAvailableSpaces(), is(1));
-
     }
+
 
 }
