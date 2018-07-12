@@ -1,12 +1,17 @@
 package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import java.util.ArrayList;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyObject;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Dylan Wei
@@ -16,10 +21,12 @@ public class ParkingBoyTest {
 
     @Test
     public void should_get_certificate_when_has_spaces() {
-        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingLot parkingLot = mock(ParkingLot.class);
+        when(parkingLot.getAvailableSpaces()).thenReturn(10);
+        when(parkingLot.parkCar(any())).thenReturn(mock(Certificate.class));
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot);
-        Car car = new Car("123456");
+        Car car = mock(Car.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
         Certificate certificate = parkingBoy.park(car);
