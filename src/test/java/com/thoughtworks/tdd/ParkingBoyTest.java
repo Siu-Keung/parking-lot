@@ -36,13 +36,13 @@ public class ParkingBoyTest {
 
     @Test
     public void should_get_null_when_parking_lot_has_no_spaces() {
-        ParkingLot parkingLot = new ParkingLot(0);
+        ParkingLot parkingLot = mock(ParkingLot.class);
+        when(parkingLot.getAvailableSpaces()).thenReturn(0);
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot);
-        Car car = new Car("123456");
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
-        Certificate certificate = parkingBoy.park(car);
+        Certificate certificate = parkingBoy.park(mock(Car.class));
 
         assertThat(certificate, nullValue());
     }
