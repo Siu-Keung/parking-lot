@@ -50,17 +50,17 @@ public class ParkingBoyTest {
     @Test
     public void should_car_be_parked_in_first_parkinglot_when_park(){
         ParkingLot parkingLot1 = new ParkingLot(1);
-        ParkingLot parkingLot2 = new ParkingLot(1);
+        ParkingLot parkingLot2 = mock(ParkingLot.class);
+        when(parkingLot2.getAvailableSpaces()).thenReturn(10);
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot1);
         parkingLotList.add(parkingLot2);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
-        Car car = new Car("123456");
 
-        parkingBoy.park(car);
+        parkingBoy.park(mock(Car.class));
 
         assertThat(parkingLot1.getAvailableSpaces(), is(0));
-        assertThat(parkingLot2.getAvailableSpaces(), is(1));
+        assertThat(parkingLot2.getAvailableSpaces(), is(10));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot(1);
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot);
-        Car car = new Car("123456");
+        Car car = mock(Car.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
         Certificate certificate = parkingBoy.park(car);
@@ -82,7 +82,7 @@ public class ParkingBoyTest {
         ParkingLot parkingLot = new ParkingLot(1);
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot);
-        Car car = new Car("123456");
+        Car car = mock(Car.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
         Certificate fakeCertificate = new Certificate("46846848", car, parkingLot);
@@ -104,7 +104,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_get_false_when_parking_lot_not_full(){
+    public void should_get_false_when_parking_lot_full(){
         ParkingLot parkingLot = new ParkingLot(0);
         List<ParkingLot> parkingLotList = new ArrayList<>();
         parkingLotList.add(parkingLot);
