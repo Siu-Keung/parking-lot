@@ -19,7 +19,7 @@ public class ParkingLot {
 
     public Certificate parkCar(Car car){
         if(this.getAvailableSpaces() <= 0)
-            return null;
+            throw new NoParkingSpacesException();
         Certificate certificate = this.generateCertificate(car);
         this.parkingSpaces.put(certificate.getId(), car);
         return certificate;
@@ -33,7 +33,7 @@ public class ParkingLot {
 
     public Car getCar(Certificate certificate){
         if(!certificateIsAvailable(certificate))
-            return null;
+            throw new WrongCertificateException();
         Car car = this.parkingSpaces.get(certificate.getId());
         this.parkingSpaces.remove(certificate.getId());
         return car;

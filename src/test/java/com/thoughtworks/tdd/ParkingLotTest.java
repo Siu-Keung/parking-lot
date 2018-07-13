@@ -1,12 +1,15 @@
 package com.thoughtworks.tdd;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 import java.util.UUID;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
 
 /**
  * @author Dylan Wei
@@ -32,13 +35,16 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_get_null_when_parkingLot_is_full(){
-        parkingLot.parkCar(new Car("111111"));
-        parkingLot.parkCar(new Car("222222"));
+    public void should_throw_exception_when_parkingLot_is_full(){
+        parkingLot.parkCar(mock(Car.class));
+        parkingLot.parkCar(mock(Car.class));
 
-        Certificate certificate = parkingLot.parkCar(this.car);
-        assertThat(certificate, nullValue());
-
+        try {
+            parkingLot.parkCar(mock(Car.class));
+        }catch (NoParkingSpacesException e){
+            return;
+        }
+        Assertions.fail("测试失败，当车位已满时应当抛出异常！");
     }
 
     @Test
@@ -50,12 +56,15 @@ public class ParkingLotTest {
     }
 
     @Test
-    public void should_get_null_when_certificate_not_available(){
+    public void should_throw_exception_when_certificate_not_available(){
         Certificate certificate = this.parkingLot.parkCar(this.car);
 
-        Car car = this.parkingLot.getCar(notAvailableCertificate);
-        assertThat(car, nullValue());
-
+        try {
+            this.parkingLot.getCar(notAvailableCertificate);
+        }catch (WrongCertificateException e){
+            return;
+        }
+        Assertions.fail("测试失败，当凭证无效时应当抛异常！");
     }
 
     @Test
