@@ -18,7 +18,7 @@ public class ParkingLot {
     }
 
     public Certificate parkCar(Car car){
-        if(this.parkingSpaces.size() == this.size)
+        if(this.getAvailableSpaces() <= 0)
             return null;
         Certificate certificate = this.generateCertificate(car);
         this.parkingSpaces.put(certificate.getId(), car);
