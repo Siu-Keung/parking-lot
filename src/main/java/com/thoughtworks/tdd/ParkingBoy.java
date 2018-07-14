@@ -26,7 +26,9 @@ public class ParkingBoy {
 
     public Certificate park(Car car) {
         ParkingLot notFullParkingLot = this.getFirstNotFullParkingLot();
-        return notFullParkingLot == null ? null : notFullParkingLot.parkCar(car);
+        if(notFullParkingLot == null)
+            throw new NoParkingSpacesException();
+        return notFullParkingLot.parkCar(car);
     }
 
     private ParkingLot getFirstNotFullParkingLot(){

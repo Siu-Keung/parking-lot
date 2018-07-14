@@ -3,7 +3,6 @@ package com.thoughtworks.tdd;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.util.UUID;
 import static org.hamcrest.CoreMatchers.is;
@@ -61,7 +60,7 @@ public class ParkingLotTest {
 
         try {
             this.parkingLot.getCar(notAvailableCertificate);
-        }catch (WrongCertificateException e){
+        }catch (UnavailableCertificateException e){
             return;
         }
         Assertions.fail("测试失败，当凭证无效时应当抛异常！");
