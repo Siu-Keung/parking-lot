@@ -13,7 +13,6 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -86,6 +85,13 @@ public class InteractionHandlerTest {
 
         assertThat(new String(byteOut.toByteArray()), is("请输入小票编号："));
         assertThat(certificateNo, is("40b83c35-5465-47b4-8854-aaf3517b6f95"));
+    }
+
+    @Test
+    public void should_print_unpark_successfully_and_the_car_no(){
+        handler.displayUnparkSuccessfully("粤A1475");
+
+        assertThat(new String(byteOut.toByteArray()), is("车已取出，您的车牌号是: 粤A1475\n"));
     }
 
 

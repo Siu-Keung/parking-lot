@@ -2,13 +2,11 @@ package com.thoughtworks.tdd;
 
 import com.thoughtworks.exceptions.IllegalCommandException;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import java.util.Scanner;
 
 public class InteractionHandler {
 
     public int showMainScreenAndGetChoice(){
-
         System.out.print("1. 停车\n2. 取车\n请输入您要进行的操作：");
         Scanner input = new Scanner(System.in);
         int choice;
@@ -38,5 +36,9 @@ public class InteractionHandler {
         Scanner input = new Scanner(System.in);
         String certificateNo = input.nextLine();
         return certificateNo;
+    }
+
+    public void displayUnparkSuccessfully(String str) {
+        System.out.printf("车已取出，您的车牌号是: %s\n", str);
     }
 }
