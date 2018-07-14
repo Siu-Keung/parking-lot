@@ -41,4 +41,16 @@ public class InteractionHandler {
     public void displayUnparkSuccessfully(String str) {
         System.out.printf("车已取出，您的车牌号是: %s\n", str);
     }
+
+    public void alertIllegalCommand(){
+        System.out.println("非法指令，请查证后再输");
+    }
+
+    public void alertAllParkingLotIsFull(){
+        System.out.println("车已停满，请晚点再来");
+    }
+
+    public void alertNotAvailableCertificate(){
+        System.out.println("非法小票，无法取出车，请查证后再输");
+    }
 }
