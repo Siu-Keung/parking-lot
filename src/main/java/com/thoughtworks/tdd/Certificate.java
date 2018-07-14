@@ -7,12 +7,14 @@ package com.thoughtworks.tdd;
 public class Certificate {
     private String id;
     private Car car;
-    private ParkingLot parkingLot;
 
-    public Certificate(String id, Car car, ParkingLot parkingLot) {
+    public Certificate(String id) {
+        this.id = id;
+    }
+
+    public Certificate(String id, Car car) {
         this.id = id;
         this.car = car;
-        this.parkingLot = parkingLot;
     }
 
     public Car getCar() {
@@ -21,14 +23,6 @@ public class Certificate {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-
-    public ParkingLot getParkingLot() {
-        return parkingLot;
-    }
-
-    public void setParkingLot(ParkingLot parkingLot) {
-        this.parkingLot = parkingLot;
     }
 
     public String getId() {
@@ -45,7 +39,6 @@ public class Certificate {
         return "Certificate{" +
                 "id='" + id + '\'' +
                 ", car=" + car +
-                ", parkingLot=" + parkingLot +
                 '}';
     }
 }

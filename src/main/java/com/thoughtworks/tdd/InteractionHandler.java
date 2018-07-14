@@ -27,8 +27,8 @@ public class InteractionHandler {
         return carNum;
     }
 
-    public void displayParkSuccessfully(String s) {
-        System.out.printf("停车成功，您的小票是：\n%s", s);
+    public void displayParkSuccessfully(String certificateNo) {
+        System.out.printf("停车成功，您的小票是：\n%s\n", certificateNo);
     }
 
     public String displayPromptAndGetCertificateNo() {
@@ -38,8 +38,8 @@ public class InteractionHandler {
         return certificateNo;
     }
 
-    public void displayUnparkSuccessfully(String str) {
-        System.out.printf("车已取出，您的车牌号是: %s\n", str);
+    public void displayUnparkSuccessfully(String carNo) {
+        System.out.printf("车已取出，您的车牌号是: %s\n", carNo);
     }
 
     public void alertIllegalCommand(){

@@ -30,7 +30,7 @@ public class ParkingLot {
 
     private Certificate generateCertificate(Car car){
         String id = UUID.randomUUID().toString();
-        Certificate certificate = new Certificate(id, car, this);
+        Certificate certificate = new Certificate(id, car);
         return certificate;
     }
 
@@ -43,8 +43,7 @@ public class ParkingLot {
     }
 
     private boolean checkCertificateIsAvailable(Certificate certificate){
-        return this.parkingSpaces.containsKey(certificate.getId()) 
-                && certificate.getParkingLot() == this;
+        return this.parkingSpaces.containsKey(certificate.getId());
     }
 
     public int getAvailableSpaces(){

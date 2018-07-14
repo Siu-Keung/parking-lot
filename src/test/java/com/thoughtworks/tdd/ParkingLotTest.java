@@ -27,7 +27,7 @@ public class ParkingLotTest {
         this.car = new Car("123456");
         this.parkingLot = new ParkingLot(2);
         this.notAvailableCertificate = new Certificate(
-                UUID.randomUUID().toString(), new Car("9999999"), new ParkingLot(10));
+                UUID.randomUUID().toString(), new Car("9999999"));
     }
 
     @Test

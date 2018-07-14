@@ -56,22 +56,6 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_car_be_parked_in_first_parkinglot_when_park(){
-        ParkingLot parkingLot1 = new ParkingLot(1);
-        ParkingLot parkingLot2 = mock(ParkingLot.class);
-        when(parkingLot2.getAvailableSpaces()).thenReturn(10);
-        List<ParkingLot> parkingLotList = new ArrayList<>();
-        parkingLotList.add(parkingLot1);
-        parkingLotList.add(parkingLot2);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
-
-        parkingBoy.park(mock(Car.class));
-
-        assertThat(parkingLot1.getAvailableSpaces(), is(0));
-        assertThat(parkingLot2.getAvailableSpaces(), is(10));
-    }
-
-    @Test
     public void should_get_car_when_certificate_is_available(){
         ParkingLot parkingLot = new ParkingLot(1);
         List<ParkingLot> parkingLotList = new ArrayList<>();
@@ -93,7 +77,7 @@ public class ParkingBoyTest {
         Car car = mock(Car.class);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLotList);
 
-        Certificate fakeCertificate = new Certificate("46846848", car, parkingLot);
+        Certificate fakeCertificate = new Certificate("46846848", car);
 
         try {
             parkingBoy.unpark(fakeCertificate);
@@ -129,17 +113,21 @@ public class ParkingBoyTest {
 
     @Test
     public void should_cars_be_parked_into_2_parkinglots_orderly_when_park_2_cars(){
+        Car car = mock(Car.class);
         ParkingLot parkingLot1 = mock(ParkingLot.class);
+        Certificate certificate1 = mock(Certificate.class);
         when(parkingLot1.getAvailableSpaces()).thenReturn(1, 0);
-        when(parkingLot1.parkCar(mock(Car.class))).thenReturn(mock(Certificate.class));
+        when(parkingLot1.parkCar(car)).thenReturn(certificate1);
+        when(certificate1.getId()).thenReturn("hfawhfuwhefjunksnfkjew");
         ParkingLot parkingLot2 = mock(ParkingLot.class);
+        Certificate certificate2 = mock(Certificate.class);
         when(parkingLot2.getAvailableSpaces()).thenReturn(1, 0);
-        when(parkingLot2.parkCar(mock(Car.class))).thenReturn(mock(Certificate.class));
+        when(parkingLot2.parkCar(car)).thenReturn(certificate2);
+        when(certificate2.getId()).thenReturn("fajiowjofijewafiajfewffaew");
         List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
         ParkingBoy boy = new ParkingBoy(parkingLots);
         InOrder inOrder = Mockito.inOrder(parkingLot1, parkingLot2);
 
-        Car car = mock(Car.class);
         boy.park(car);
         boy.park(car);
 
