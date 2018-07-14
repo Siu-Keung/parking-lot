@@ -78,5 +78,15 @@ public class InteractionHandlerTest {
         assertThat(new String(byteOut.toByteArray()), is("停车成功，您的小票是：\n40b83c35-5465-47b4-8854-aaf3517b6f95"));
     }
 
+    @Test
+    public void should_print_promt_and_return_certificate_no(){
+        simulateConsoleInput("40b83c35-5465-47b4-8854-aaf3517b6f95");
+
+        String certificateNo = handler.displayPromptAndGetCertificateNo();
+
+        assertThat(new String(byteOut.toByteArray()), is("请输入小票编号："));
+        assertThat(certificateNo, is("40b83c35-5465-47b4-8854-aaf3517b6f95"));
+    }
+
 
 }

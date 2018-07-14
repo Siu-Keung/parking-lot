@@ -32,4 +32,11 @@ public class InteractionHandler {
     public void displayParkSuccessfully(String s) {
         System.out.printf("停车成功，您的小票是：\n%s", s);
     }
+
+    public String displayPromptAndGetCertificateNo() {
+        System.out.print("请输入小票编号：");
+        Scanner input = new Scanner(System.in);
+        String certificateNo = input.nextLine();
+        return certificateNo;
+    }
 }
