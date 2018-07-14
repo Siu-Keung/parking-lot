@@ -2,8 +2,12 @@ package com.thoughtworks.tdd;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.InOrder;
 import org.mockito.Mock;
+import org.mockito.Mockito;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
@@ -12,6 +16,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyObject;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 /**
@@ -121,6 +126,26 @@ public class ParkingBoyTest {
         boolean canPark = parkingBoy.canPark();
 
         assertThat(canPark, is(false));
+    }
+
+    @Test
+    public void should_all_parking_lots_be_full_when_park_2_cars(){
+        ParkingLot parkingLot1 = mock(ParkingLot.class);
+        when(parkingLot1.getAvailableSpaces()).thenReturn(1, 0);
+        when(parkingLot1.parkCar(mock(Car.class))).thenReturn(mock(Certificate.class));
+        ParkingLot parkingLot2 = mock(ParkingLot.class);
+        when(parkingLot2.getAvailableSpaces()).thenReturn(1, 0);
+        when(parkingLot2.parkCar(mock(Car.class))).thenReturn(mock(Certificate.class));
+        List<ParkingLot> parkingLots = Arrays.asList(parkingLot1, parkingLot2);
+        ParkingBoy boy = new ParkingBoy(parkingLots);
+        InOrder inOrder = Mockito.inOrder(parkingLot1, parkingLot2);
+
+        Car car = mock(Car.class);
+        boy.park(car);
+        boy.park(car);
+
+        inOrder.verify(parkingLot1).parkCar(car);
+        inOrder.verify(parkingLot2).parkCar(car);
     }
 
 }

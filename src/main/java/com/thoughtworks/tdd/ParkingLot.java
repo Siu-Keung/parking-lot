@@ -32,14 +32,14 @@ public class ParkingLot {
     }
 
     public Car getCar(Certificate certificate){
-        if(!certificateIsAvailable(certificate))
+        if(!checkCertificateIsAvailable(certificate))
             throw new UnavailableCertificateException();
         Car car = this.parkingSpaces.get(certificate.getId());
         this.parkingSpaces.remove(certificate.getId());
         return car;
     }
 
-    private boolean certificateIsAvailable(Certificate certificate){
+    private boolean checkCertificateIsAvailable(Certificate certificate){
         return this.parkingSpaces.containsKey(certificate.getId()) 
                 && certificate.getParkingLot() == this;
     }
