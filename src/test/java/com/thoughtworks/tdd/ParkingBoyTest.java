@@ -129,7 +129,7 @@ public class ParkingBoyTest {
     }
 
     @Test
-    public void should_all_parking_lots_be_full_when_park_2_cars(){
+    public void should_cars_be_parked_into_2_parkinglots_orderly_when_park_2_cars(){
         ParkingLot parkingLot1 = mock(ParkingLot.class);
         when(parkingLot1.getAvailableSpaces()).thenReturn(1, 0);
         when(parkingLot1.parkCar(mock(Car.class))).thenReturn(mock(Certificate.class));
