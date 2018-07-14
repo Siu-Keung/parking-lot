@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class InteractionHandler {
 
     public int showMainScreenAndGetChoice(){
+
         System.out.printf("1. 停车\n2. 取车\n请输入您要进行的操作：");
         Scanner input = new Scanner(System.in);
         int choice;
