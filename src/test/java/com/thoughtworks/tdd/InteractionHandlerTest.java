@@ -67,8 +67,15 @@ public class InteractionHandlerTest {
 
         String input = handler.displayPromptAndGetCarNum();
 
-        assertThat(input, is("粤T4658"));
         assertThat(new String(byteOut.toByteArray()), is("请输入车牌号："));
+        assertThat(input, is("粤T4658"));
+    }
+
+    @Test
+    public void should_print_park_successfully(){
+        handler.displayParkSuccessfully("40b83c35-5465-47b4-8854-aaf3517b6f95");
+
+        assertThat(new String(byteOut.toByteArray()), is("停车成功，您的小票是：\n40b83c35-5465-47b4-8854-aaf3517b6f95"));
     }
 
 

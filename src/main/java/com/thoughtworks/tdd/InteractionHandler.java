@@ -28,4 +28,8 @@ public class InteractionHandler {
         String carNum = input.nextLine();
         return carNum;
     }
+
+    public void displayParkSuccessfully(String s) {
+        System.out.printf("停车成功，您的小票是：\n%s", s);
+    }
 }
