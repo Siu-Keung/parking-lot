@@ -1,6 +1,6 @@
 package com.thoughtworks.tdd;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import com.thoughtworks.exceptions.NoParkingSpacesException;
 
 import java.util.ArrayList;
 import java.util.List;

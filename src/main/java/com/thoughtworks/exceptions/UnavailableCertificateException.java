@@ -1,4 +1,4 @@
-package com.thoughtworks.tdd;
+package com.thoughtworks.exceptions;
 
 /**
  * @author Dylan Wei

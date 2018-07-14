@@ -1,5 +1,8 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.exceptions.NoParkingSpacesException;
+import com.thoughtworks.exceptions.UnavailableCertificateException;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
