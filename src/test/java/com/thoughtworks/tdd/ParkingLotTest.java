@@ -1,5 +1,8 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.domain.Car;
+import com.thoughtworks.domain.Certificate;
+import com.thoughtworks.domain.ParkingLot;
 import com.thoughtworks.exceptions.NoParkingSpacesException;
 import com.thoughtworks.exceptions.UnavailableCertificateException;
 import org.junit.jupiter.api.Assertions;

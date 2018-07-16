@@ -1,4 +1,4 @@
-package com.thoughtworks.tdd;
+package com.thoughtworks.domain;
 
 /**
  * @author Dylan Wei

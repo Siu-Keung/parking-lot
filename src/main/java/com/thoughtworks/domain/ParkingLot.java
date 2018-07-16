@@ -1,4 +1,4 @@
-package com.thoughtworks.tdd;
+package com.thoughtworks.domain;
 
 import com.thoughtworks.exceptions.NoParkingSpacesException;
 import com.thoughtworks.exceptions.UnavailableCertificateException;

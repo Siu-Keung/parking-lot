@@ -1,7 +1,10 @@
-package com.thoughtworks.tdd;
+package com.thoughtworks.controller;
 
+import com.thoughtworks.domain.ParkingBoy;
+import com.thoughtworks.domain.ParkingLot;
 import com.thoughtworks.exceptions.ForbiddenOperationException;
-
+import com.thoughtworks.exceptions.IllegalCommandException;
+import com.thoughtworks.tdd.OutputHandler;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,35 +53,37 @@ public class ManagementController {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(parkingLotInfo);
         if(!matcher.find()){
-            System.out.println("找不到分组");
+            outputHandler.outputAddFaild();
+            outputHandler.outputMainPage();
+            return "main";
         }
         String name = matcher.group(1);
         int size = Integer.valueOf(matcher.group(2));
         ParkingLot parkingLot = new ParkingLot(size);
         parkingLot.setName(name);
         boy.addParkingLot(parkingLot);
-        outputHandler.send("停车场添加成功！");
+        outputHandler.outputAddParkingLotSuccessfully();
         outputHandler.outputMainPage();
         return "main";
     }
 
     public String removeParkingLotPage(){
-        outputHandler.send("请输入需要删除的被管理停车场ID:");
+        outputHandler.outputEnterParkingLotId();
         return "management_remove";
     }
 
     public String handleRemoveParkingLotRequest(String parkingLotId){
         if(!boy.hasParkingLot(parkingLotId)){
-            outputHandler.send("停车删除失败，原因：停车场不存在！");
+            outputHandler.outputRemoveParkingLotFailed("停车场不存在！");
             outputHandler.outputMainPage();
             return "main";
         }
         try {
             boy.removeParkingLot(parkingLotId);
-            outputHandler.send("停车场删除成功！");
+            outputHandler.outputRemoveParkingLotSuccessfully();
             outputHandler.outputMainPage();
         }catch (ForbiddenOperationException e){
-            outputHandler.send("停车场删除失败，原因：此停车场中，依然停有汽车，无法删除！");
+            outputHandler.outputRemoveParkingLotFailed("此停车场中，依然停有汽车，无法删除！");
             outputHandler.outputMainPage();
         }
         return "main";
