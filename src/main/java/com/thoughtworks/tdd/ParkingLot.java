@@ -14,6 +14,8 @@ import java.util.UUID;
 public class ParkingLot {
     private Map<String, Car> parkingSpaces;
     private Integer size;
+    private String id;
+    private String name;
 
     public ParkingLot(Integer size) {
         this.size = size;
@@ -50,5 +52,24 @@ public class ParkingLot {
         return this.size - this.parkingSpaces.size();
     }
 
+    public Integer getSize() {
+        return size;
+    }
 
+    public String getId() {
+
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

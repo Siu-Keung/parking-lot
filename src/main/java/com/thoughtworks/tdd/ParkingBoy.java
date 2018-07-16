@@ -1,5 +1,6 @@
 package com.thoughtworks.tdd;
 
+import com.thoughtworks.exceptions.ForbiddenOperationException;
 import com.thoughtworks.exceptions.NoParkingSpacesException;
 import com.thoughtworks.exceptions.UnavailableCertificateException;
 
@@ -7,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author Dylan Wei
@@ -57,5 +59,23 @@ public class ParkingBoy {
     public boolean canPark() {
         boolean canPark = this.getFirstNotFullParkingLot() == null ? false : true;
         return canPark;
+    }
+
+    public List<ParkingLot> getParkingLots() {
+        return parkingLots;
+    }
+
+    public boolean hasParkingLot(String parkingLotId){
+        return this.parkingLots.stream().anyMatch(item -> parkingLotId.equals(item.getId()));
+    }
+
+    public void removeParkingLot(String parkingLotId){
+        List<ParkingLot> parkingLotList = this.parkingLots.stream()
+                .filter(item -> item.getId().equals(parkingLotId)).collect(Collectors.toList());
+        ParkingLot temp = parkingLotList.get(0);
+        if(temp.getSize() != temp.getAvailableSpaces())
+            throw new ForbiddenOperationException();
+        this.parkingLots = this.parkingLots.stream()
+                .filter(item -> !item.getId().equals(parkingLotId)).collect(Collectors.toList());
     }
 }
